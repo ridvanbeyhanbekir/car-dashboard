@@ -1,0 +1,185 @@
+body {
+    text-align: right;
+    font-size: 100%;
+    background: #000;
+    color: #ffffff;
+}
+
+#errmsg {
+    color: #ff0000;
+    display:none;
+}
+
+#wrapper {
+    margin: 0 auto;
+}
+
+#speed-input {
+    width: 100%;
+    background: #191919;
+    border: 1px solid #292929;
+    color:#fff;
+}
+
+#right {
+    float: right;
+    background: #333;
+    color:#fff;
+}
+
+input {
+	background: #333;
+	border: 1px solid #292929;
+	color:#fff;
+}
+
+label, input, p {
+    font-size: 2em;
+    font-weight: normal;
+}
+
+#dashboard {
+    width: 960px;
+    margin: 0 auto;
+    padding: 100px 30px 20px;
+    border: 2px solid white;
+    border-radius: 70% 70% 10% 10%;
+}
+
+#dashboard:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+#gauge-wrapper {
+    position: relative;
+    width: 350px;
+    height: 350px;
+    border: 2px solid white;
+    border-radius: 50%;
+}
+
+#gauge,
+#gauge-tachometer {
+    margin: 0 auto;
+    margin-top: 10px;
+    position: relative;
+    height: 260px;
+    border-radius: 50% 50% 30% 30%;
+}
+
+#gauge {
+    width: 334px;
+    background: #000 url(../images/speedometer-2.png) no-repeat;
+}
+
+#gauge-tachometer {
+    width: 318px;
+    background: #000 url(../images/tachometer.jpg) no-repeat;
+}
+
+
+#needle,
+#needle-tachometer {
+    height: 5px;
+    width: 148px;
+    background: #ff0200;
+    position: absolute;
+    bottom: 97px;
+    left: 18px;
+}
+
+#needle-tachometer {
+    transform-origin: right bottom 0px; 
+    transform: matrix(0.9205, -0.39073, 0.39073, 0.9205, 0, 0);
+}
+
+#numbers,
+#time {
+    width: 140px;
+    height: 30px;
+    background: #191919;
+    position: absolute;
+    bottom: 10px;
+    left: 85px;
+    color: #fff;
+    font-size: 1.8em;
+    line-height: 1.34em; 
+    font-family: "Courier New", Courier, monospace;
+    padding: 0px 10px 5px;
+    border: 1px solid #292929;
+    text-align: center;
+}
+
+#circle,
+#circle-tachometer {
+    width: 79px;
+    height: 79px;
+    background: url(../images/circle-3.png)no-repeat;
+    bottom: 59px;
+    left: 127px;
+    position: absolute;
+}
+
+#circle,
+#circle-tachometer {
+    background: url(../images/circle-3.png)no-repeat;
+}
+
+#mi-km {
+    bottom: -25px;
+    left: 97px;
+    text-align: center;
+    position: absolute;
+    width: 140px;
+    height: 30px;
+    color: #999;
+    font-size: 1.4em;
+    font-family: "Courier New", Courier, monospace;
+}
+
+#display-mode {
+    position: absolute;
+    width: 100%;
+    bottom: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-size: 10px;
+}
+
+#display-mode label[for="mi-radio"] {
+    margin-right: 20px;
+}
+
+#rev-limiter-wrapper,
+#dashboard-center,
+#speedometer-wrapper {
+    float: left;
+}
+
+#dashboard-center {
+    height: 354px;
+    padding: 0 30px;
+}
+
+#dashboard-fuel {
+    display: inline-block;
+    height: 100px;
+    width: 185px;
+    background: url(../images/fuel.jpg) no-repeat;
+}
+
+#dashboard-comp-display {
+    position: relative;
+    width: 185px;
+    height: 220px;
+    
+}
+
+#dashboard-fuel,
+#dashboard-comp-display {
+    border: 2px solid white;
+    border-radius: 10%;
+}
