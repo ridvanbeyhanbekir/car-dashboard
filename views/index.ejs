@@ -10,6 +10,7 @@
 	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.15.0/TweenLite.min.js"></script>
 	<script type="text/javascript" src="/javascripts/vroom.js"></script>
 	<script type="text/javascript" src="/javascripts/web-socket.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCip8Cpx_evSkbz4cVfY4igR2ZJkX5eyso&libraries=places" async defer></script>
 </head>
 <body>
 <div id="wrapper">
@@ -23,6 +24,12 @@
 		    <label for="kilometers">Kilometers:</label>
 		    <input type="text" name="kilometers" id="kilometers">
 		</div>
+
+		<div>
+		    <label for="rpm">RPM:</label>
+		    <input type="text" name="rpm" id="rpm">
+		</div>
+
 		<p id="errmsg"></p>
 	</div>
 
@@ -41,6 +48,12 @@
 		<div id="dashboard-center">
 			<div id="dashboard-fuel"></div>
 			<div id="dashboard-comp-display">
+				<img id="nav-loader" src="/images/spinner.mov.gif"/>
+				<div class="map">
+                    <div id="map_canvas" class="stores-map">
+                    </div>
+                </div>
+                <input id="current-position-pin-image" type="hidden" value="/images/navigation-icon.png"/>
 			</div>
 		</div>
 
@@ -66,19 +79,17 @@
 	</div>
 </div>
 
+<script src="/javascripts/navigation.js"></script>
+
 <script type="text/javascript">
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-36251023-1']);
-  _gaq.push(['_setDomainName', 'jqueryscript.net']);
-  _gaq.push(['_trackPageview']);
-
   (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		$(window).on('load', function () {
+			navigation.init();
+		});
   })();
 
 </script>
+
 </body>
 </html>

@@ -183,3 +183,20 @@ label, input, p {
     border: 2px solid white;
     border-radius: 10%;
 }
+
+.map,
+.stores-map {
+    height: 100%;
+}
+
+.stores-map {
+    border-radius: 10%;
+}
+
+#nav-loader {
+    position: absolute;
+    width: 100px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}

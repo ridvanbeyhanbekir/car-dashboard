@@ -12,12 +12,22 @@ function showDisplayMode () {
 	}
 }
 
+function convertRPM (rpm) {
+	var rpmNum = rpm / 100;
+	var rangeValue = 215;
+
+	rpm = rpmNum * 2.74 - 31;
+	rpm = rpm < rangeValue ? rpm : rangeValue;
+
+	return rpm;
+}
+
 function convertSpeed(speed, from, to) {
 	var speedNum = speed;
 	var rangeValue = 215;
 
 	if (from !== '') {
-		rangeValue = to === 'kilometers' ? 75 : 195;
+		//rangeValue = to === 'kilometers' ? 75 : rangeValue;
 	}
 
 	var isSpeedInRange = speed <= rangeValue;
@@ -33,7 +43,8 @@ function convertSpeed(speed, from, to) {
 	}
 
 	$('#numbers').html(Math.round(speedNum));
-	speed = isSpeedInRange ? speedNum * 2 - 31 : 215;
+	speed = speedNum * 2 - 31;
+	speed = speed < rangeValue ? speed : rangeValue;
 
 	return speed;
 }
@@ -76,15 +87,27 @@ function displayDate () {
 	$('#time').text(currentDate.getHours() + ':' + minutesString);
 }
 
+function handleTachometerRotation (value) {
+	value = value || 0;
+	var rpm = parseInt(value);
+
+	if (!isNaN(rpm)) {
+		console.log(rpm);
+		rpm = convertRPM (rpm);
+		var needleTachometer = $("#needle-tachometer");
+		TweenLite.to(needleTachometer, 2, {rotation: rpm,  transformOrigin:"bottom right"});
+	}
+}
+
 // Calculator for converting Miles to Kilometers
 $(document).ready(function() {
 	$selectedDisplayMode = getDisplayMode();
 
-	var needle = $("#needle");
+	/*var needle = $("#needle");
 	TweenLite.to(needle, 2, {rotation:-31,  transformOrigin:"bottom right"});
 
 	var needleTachometer = $("#needle-tachometer");
-	TweenLite.to(needleTachometer, 2, {rotation: -1,  transformOrigin:"bottom right"});
+	TweenLite.to(needleTachometer, 2, {rotation: -1,  transformOrigin:"bottom right"});*/
 
 	// Initialize the clock
 	displayDate();
@@ -128,5 +151,15 @@ $(document).ready(function() {
 		var inputValue = $this.val();
 
 		handleMileageRotation(inputValue, inputUnit);
+	});
+
+	/*
+	*	Handle rpm rotation
+	*/
+	$('#rpm').on('keyup', function () {
+		var $this = $(this); 
+		var inputValue = $this.val();
+
+		handleTachometerRotation(inputValue);
 	});
 });
