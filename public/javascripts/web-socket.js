@@ -20,13 +20,13 @@ function handleIncomingUpdate (updateData) {
 
     switch (name) {
       case 'rpm':
-        handleTachometerRotation(value);
+        handleTachometerRotation (value);
         break; 
       case 'speed':
-        handleMileageRotation(value, 'miles');
+        handleMileageRotation (value, 'miles');
         break;
       case 'temperature':
-        //handleTemperatureUpdate(value);
+        //handleTemperatureUpdate (value);
         break;
       case 'default': break;
     }

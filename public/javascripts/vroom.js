@@ -57,6 +57,7 @@ function handleMileageRotation (value, unit) {
 
 	if (!isNaN(speed) && unit) {
 
+		console.log('Speed: ' + speed + ' ' + unit);
 		var unitToConvertFrom = checkedDisplayModeValue !== unit ? unit : '';
 		speed = convertSpeed(speed, unitToConvertFrom, checkedDisplayModeValue);
 		
@@ -92,7 +93,7 @@ function handleTachometerRotation (value) {
 	var rpm = parseInt(value);
 
 	if (!isNaN(rpm)) {
-		console.log(rpm);
+		console.log('RPM: ' + rpm);
 		rpm = convertRPM (rpm);
 		var needleTachometer = $("#needle-tachometer");
 		TweenLite.to(needleTachometer, 2, {rotation: rpm,  transformOrigin:"bottom right"});
