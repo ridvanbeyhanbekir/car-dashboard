@@ -1,9 +1,9 @@
-var navigation = {
+var Navigation = {
 	determineLatLong: function (location) {
 		var latitude = location.coords.latitude;
 		var longitude = location.coords.longitude;
 		$('.location-sharing-blocked').addClass('hide');
-		navigation.drawMap(latitude, longitude);
+		Navigation.drawMap(latitude, longitude);
 	},
 	drawMap: function (latitude, longitude) {
 		var _self = this;

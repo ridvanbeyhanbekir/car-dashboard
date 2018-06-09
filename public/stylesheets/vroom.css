@@ -90,9 +90,10 @@ label, input, p {
     left: 18px;
 }
 
+#needle,
 #needle-tachometer {
     transform-origin: right bottom 0px; 
-    transform: matrix(0.9205, -0.39073, 0.39073, 0.9205, 0, 0);
+    transform: matrix(0.85716, -0.51503, 0.51503, 0.85716, 0, 0);
 }
 
 #numbers,
@@ -164,21 +165,60 @@ label, input, p {
     padding: 0 30px;
 }
 
-#dashboard-fuel {
-    display: inline-block;
+#dashboard-mini-display {
     height: 100px;
     width: 185px;
-    background: url(../images/fuel.jpg) no-repeat;
+    margin-bottom: 10px;
+}
+
+#dashboard-mini-gear,
+#dashboard-mini-temperature {
+    display: inline-block;
+    width: 49%;
+    height: 80%;
+    float: left;
+    margin-top: 5%;
+    text-align: center;
+}
+
+#dashboard-mini-gear h2,
+#dashboard-mini-temperature h2,
+#dashboard-mini-gear h1,
+#dashboard-mini-temperature h1 {
+    margin: 0;
+}
+
+#dashboard-mini-gear h1,
+#dashboard-mini-temperature h1 {
+    height: 37px;
+}
+
+#dashboard-mini-gear h2,
+#dashboard-mini-temperature h2 {
+    border-bottom: solid white;
+}
+
+#dashboard-mini-temperature input[type="radio"]:checked,
+#dashboard-mini-temperature input[type="radio"]:checked + label {
+    display: none;
+}
+
+#dashboard-mini-temperature label {
+    font-size: 20px;
+}
+
+#dashboard-mini-gear {
+    border: solid white;
+    border-style: none solid none none;
 }
 
 #dashboard-comp-display {
     position: relative;
     width: 185px;
     height: 220px;
-    
 }
 
-#dashboard-fuel,
+#dashboard-mini-display,
 #dashboard-comp-display {
     border: 2px solid white;
     border-radius: 10%;

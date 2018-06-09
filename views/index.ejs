@@ -8,8 +8,6 @@
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.15.0/plugins/CSSPlugin.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.15.0/easing/EasePack.min.js"></script>
 	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.15.0/TweenLite.min.js"></script>
-	<script type="text/javascript" src="/javascripts/vroom.js"></script>
-	<script type="text/javascript" src="/javascripts/web-socket.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCip8Cpx_evSkbz4cVfY4igR2ZJkX5eyso&libraries=places" async defer></script>
 </head>
 <body>
@@ -46,7 +44,21 @@
 		</div>
 
 		<div id="dashboard-center">
-			<div id="dashboard-fuel"></div>
+			<div id="dashboard-mini-display">
+				<div id="dashboard-mini-gear">
+					<h2>Gear</h2>
+					<h1 id="gear-position"></h1>
+				</div>
+				<div id="dashboard-mini-temperature">
+					<h2 id="temp-unit"></h2>
+					<h1 id="temp-value"></h1>
+
+					<input type="radio" name="temp-unit-radio" id="temp-unit-fahrenheit" value="fahrenheit" checked="checked"/>
+					<label for="temp-unit-fahrenheit">°F</label>
+					<input type="radio" name="temp-unit-radio" id="temp-unit-celcius" value="celcius"/>
+					<label for="temp-unit-celcius">°C</label>
+				</div>
+			</div>
 			<div id="dashboard-comp-display">
 				<img id="nav-loader" src="/images/spinner.mov.gif"/>
 				<div class="map">
@@ -79,13 +91,20 @@
 	</div>
 </div>
 
-<script src="/javascripts/navigation.js"></script>
+
+<script type="text/javascript" src="/javascripts/mini-display-manager.js"></script>
+<script type="text/javascript" src="/javascripts/speedometer.js"></script>
+<script type="text/javascript" src="/javascripts/tachometer.js"></script>
+<script type="text/javascript" src="/javascripts/dashboard-manager.js"></script>
+<script type="text/javascript" src="/javascripts/vroom.js"></script>
+<script type="text/javascript" src="/javascripts/web-socket.js"></script>
+<script type="text/javascript" src="/javascripts/navigation.js"></script>
 
 <script type="text/javascript">
 
   (function() {
 		$(window).on('load', function () {
-			navigation.init();
+			Navigation.init();
 		});
   })();
 

@@ -1,85 +1,5 @@
 var $selectedDisplayMode;
-
-function getDisplayMode () {
-	return $('#display-mode').find('input[type="radio"]:checked');
-}
-
-function showDisplayMode () {
-	var $checkedDisplayMode = getDisplayMode();
-
-	if ($checkedDisplayMode.length > 0) {
-		$('#mi-km').html($checkedDisplayMode.val());
-	}
-}
-
-function convertRPM (rpm) {
-	var rpmNum = rpm / 100;
-	var rangeValue = 215;
-
-	rpm = rpmNum * 2.74 - 31;
-	rpm = rpm < rangeValue ? rpm : rangeValue;
-
-	return rpm;
-}
-
-function convertSpeed(speed, from, to) {
-	var speedNum = speed;
-	var rangeValue = 215;
-
-	if (from !== '') {
-		//rangeValue = to === 'kilometers' ? 75 : rangeValue;
-	}
-
-	var isSpeedInRange = speed <= rangeValue;
-
-	if (from === 'kilometers') { // to miles
-		
-		speedNum = speed * 0.621371192;
-
-	} else if (from === 'miles') { // to kilometers
-
-		speedNum = speed * 1.609344;
-
-	}
-
-	$('#numbers').html(Math.round(speedNum));
-	speed = speedNum * 2 - 31;
-	speed = speed < rangeValue ? speed : rangeValue;
-
-	return speed;
-}
-
-function handleMileageRotation (value, unit) {
-	value = value || 0;
-	var speed = parseInt(value);
-	var $checkedDisplayMode = getDisplayMode();
-	var checkedDisplayModeValue = $checkedDisplayMode.val().toLowerCase();
-
-	if (!isNaN(speed) && unit) {
-
-		console.log('Speed: ' + speed + ' ' + unit);
-		var unitToConvertFrom = checkedDisplayModeValue !== unit ? unit : '';
-		speed = convertSpeed(speed, unitToConvertFrom, checkedDisplayModeValue);
-		
-		var needle = $("#needle");    
-		TweenLite.to(needle, 2, {rotation:speed,  transformOrigin:"bottom right"});
-
-	} else { 
-   		$('#miles').val('');
-   		$('#kilometers').val('');
-   		$('#numbers').html('');	
-   		$("#errmsg").html("Wrong parameters").show().fadeOut(1600);
-   }
-}
-
-function updateMileageRotation (unit) {
-	var currentSpeed = $('#numbers').text();
-	unit = unit.toLowerCase();
-
-	if (currentSpeed) {
-		handleMileageRotation(currentSpeed, unit);
-	}
-}
+var $selectedTemperatureUnit;
 
 function displayDate () {
 	var currentDate = new Date();
@@ -88,27 +8,10 @@ function displayDate () {
 	$('#time').text(currentDate.getHours() + ':' + minutesString);
 }
 
-function handleTachometerRotation (value) {
-	value = value || 0;
-	var rpm = parseInt(value);
-
-	if (!isNaN(rpm)) {
-		console.log('RPM: ' + rpm);
-		rpm = convertRPM (rpm);
-		var needleTachometer = $("#needle-tachometer");
-		TweenLite.to(needleTachometer, 2, {rotation: rpm,  transformOrigin:"bottom right"});
-	}
-}
-
 // Calculator for converting Miles to Kilometers
 $(document).ready(function() {
-	$selectedDisplayMode = getDisplayMode();
-
-	/*var needle = $("#needle");
-	TweenLite.to(needle, 2, {rotation:-31,  transformOrigin:"bottom right"});
-
-	var needleTachometer = $("#needle-tachometer");
-	TweenLite.to(needleTachometer, 2, {rotation: -1,  transformOrigin:"bottom right"});*/
+	$selectedDisplayMode = Speedometer.getDisplayMode();
+	$selectedTemperatureUnit = MiniDisplayManager.getSelectedTemperatureUnit();
 
 	// Initialize the clock
 	displayDate();
@@ -132,15 +35,27 @@ $(document).ready(function() {
 	});
 
 	/*
-	*	Show and update display mode.
+	*	Show and update speedometer display mode.
 	*/
-	showDisplayMode();
+	Speedometer.showDisplayMode();
 
 	$('input[name="display-mode-radio"]').on('click', function () {
-		showDisplayMode();
-		updateMileageRotation($selectedDisplayMode.val());
+		Speedometer.showDisplayMode();
+		Speedometer.updateMileageRotation($selectedDisplayMode.val());
 
 		$selectedDisplayMode = $(this);
+	});
+
+	/*
+	*	Show and update temperature display mode.
+	*/
+	MiniDisplayManager.updateTemperatureUnit();
+
+	$('input[name="temp-unit-radio"]').on('click', function () {
+		MiniDisplayManager.updateTemperatureUnit();
+		MiniDisplayManager.updateTemperature($selectedTemperatureUnit.val());
+
+		$selectedTemperatureUnit =  $(this);
 	});
 
 	/*
@@ -151,7 +66,7 @@ $(document).ready(function() {
 		var inputUnit = $this.attr('name');
 		var inputValue = $this.val();
 
-		handleMileageRotation(inputValue, inputUnit);
+		Speedometer.handleMileageRotation(inputValue, inputUnit);
 	});
 
 	/*
@@ -161,6 +76,6 @@ $(document).ready(function() {
 		var $this = $(this); 
 		var inputValue = $this.val();
 
-		handleTachometerRotation(inputValue);
+		Tachometer.handleTachometerRotation(inputValue);
 	});
 });
