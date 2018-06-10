@@ -39,6 +39,7 @@ label, input, p {
 }
 
 #dashboard {
+    position: relative;
     width: 960px;
     margin: 0 auto;
     padding: 100px 30px 20px;
@@ -52,6 +53,14 @@ label, input, p {
     clear: both;
 }
 
+#dashboard-indicators {
+    position: absolute;
+    text-align: center;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
 #gauge-wrapper {
     position: relative;
     width: 350px;
@@ -62,6 +71,7 @@ label, input, p {
 
 #gauge,
 #gauge-tachometer {
+    width: 334px;
     margin: 0 auto;
     margin-top: 10px;
     position: relative;
@@ -70,13 +80,11 @@ label, input, p {
 }
 
 #gauge {
-    width: 334px;
     background: #000 url(../images/speedometer-2.png) no-repeat;
 }
 
 #gauge-tachometer {
-    width: 318px;
-    background: #000 url(../images/tachometer.jpg) no-repeat;
+    background: #000 url(../images/tachometer.png) no-repeat;
 }
 
 
@@ -86,8 +94,16 @@ label, input, p {
     width: 148px;
     background: #ff0200;
     position: absolute;
+}
+
+#needle {
     bottom: 97px;
     left: 18px;
+}
+
+#needle-tachometer {
+    bottom: 96px;
+    left: 15px;
 }
 
 #needle,
@@ -98,12 +114,12 @@ label, input, p {
 
 #numbers,
 #time {
-    width: 140px;
+    width: 120px;
     height: 30px;
     background: #191919;
     position: absolute;
     bottom: 10px;
-    left: 85px;
+    left: 95px;
     color: #fff;
     font-size: 1.8em;
     line-height: 1.34em; 
@@ -185,7 +201,7 @@ label, input, p {
 #dashboard-mini-temperature h2,
 #dashboard-mini-gear h1,
 #dashboard-mini-temperature h1 {
-    margin: 0;
+    margin: 0 10%;
 }
 
 #dashboard-mini-gear h1,

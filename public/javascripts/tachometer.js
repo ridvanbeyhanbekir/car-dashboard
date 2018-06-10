@@ -14,7 +14,7 @@ var Tachometer = {
 		var rpmNum = rpm / 100;
 		var rangeValue = 209;
 
-		rpm = rpmNum * 2.74 - 31;
+		rpm = rpmNum * 3 - 31;
 		rpm = rpm < rangeValue ? rpm : rangeValue;
 
 		return rpm;
